@@ -412,7 +412,7 @@ def generate_story_with_gemini(
     theme: str,
     protagonist: str,
     api_key: str,
-    model_name: str = "gemini-2.5-flash",
+    model_name: str = "gemini-3.8-flash",
     temperature: float = 0.7
 ) -> Dict[str, Any]:
     """Call Google Gemini API using google-genai SDK with structured output validation."""
@@ -462,10 +462,10 @@ CRITICAL CONTENT SPECIFICATIONS:
             config=config,
         )
     except Exception as e:
-        # Fallback to gemini-2.5-flash if model name is unrecognized
-        if model_name != "gemini-2.5-flash":
+        # Fallback to gemini-3.8-flash if model name is unrecognized
+        if model_name != "gemini-3.8-flash":
             response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-3.8-flash",
                 contents=user_prompt,
                 config=config,
             )
@@ -776,7 +776,7 @@ def render_sidebar():
         st.markdown("#### 🤖 Model Parameters")
         model_choice = st.selectbox(
             "Gemini Model",
-            options=["gemini-2.5-flash", "gemini-2.5-flash"],
+            options=["gemini-3.8-flash", "gemini-3.8-flash"],
             index=0,
             help="Gemini 2.5 Flash provides optimal speed and high storytelling fidelity."
         )
@@ -966,7 +966,7 @@ def render_step_1():
                     theme=selected_theme,
                     protagonist=protagonist_input,
                     api_key=api_key,
-                    model_name=st.session_state.get("model_choice", "gemini-2.5-flash"),
+                    model_name=st.session_state.get("model_choice", "gemini-3.8-flash"),
                     temperature=st.session_state.get("temperature", 0.7)
                 )
                 st.session_state["story_data"] = story_response
@@ -981,7 +981,7 @@ def render_step_1():
                 st.rerun()
             except Exception as e:
                 st.error(f"Generation error: {str(e)}")
-                st.info("Tip: Double-check your Gemini API key or try selecting 'gemini-2.5-flash' in the sidebar.")
+                st.info("Tip: Double-check your Gemini API key or try selecting 'gemini-3.8-flash' in the sidebar.")
 
 
 # ==============================================================================
